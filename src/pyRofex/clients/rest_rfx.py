@@ -41,7 +41,7 @@ class RestClient:
             self.environment["token"] = active_token
             self.environment["initialized"] = True
 
-    def get_trade_history(self, ticker, start_date, end_date, market):
+    def get_trade_history(self, ticker, start_date, end_date, market=Market.ROFEX, clearing= None):
         """Makes a request to the API and get trade history for the instrument.
 
         For more detailed information go to: https://apihub.primary.com.ar/assets/docs/Primary-API.pdf
@@ -54,11 +54,21 @@ class RestClient:
         :type end_date: str
         :param market: Market ID related to the instrument.
         :type market: Market (Enum).
+        :param clearing: clearing of the instrument to send in the request to byma exchange, only can be 24hs or CI.
+        :type clearing: str
         :return: List of trades returned by the API.
         :rtype: dict of JSON response.
         """
-        return self.api_request(urls.historic_trades.format(m=market.value,
+        
+        if market == Market.ROFEX:
+            return self.api_request(urls.historic_trades.format(m=market,
                                                             s=ticker,
+                                                            df=start_date,
+                                                            dt=end_date))
+        else:
+            return self.api_request(urls.historic_trades_byma.format(m=market,
+                                                            s=ticker,
+                                                            c=clearing,
                                                             df=start_date,
                                                             dt=end_date))
 
