@@ -41,12 +41,12 @@ class RestClient:
             self.environment["token"] = active_token
             self.environment["initialized"] = True
 
-    def get_trade_history(self, ticker, start_date, end_date, market):
+    def get_trade_history(self, ticker, start_date, end_date, market=Market.ROFEX):
         """Makes a request to the API and get trade history for the instrument.
 
         For more detailed information go to: https://apihub.primary.com.ar/assets/docs/Primary-API.pdf
 
-        :param ticker: Ticker of the instrument to send in the request. Example: DLR/MAR23
+        :param ticker: Ticker of the instrument to send in the request. Example: DLR/JUL24 for MtB, MERV - XMEV - GGAL - 24hs for BYMA
         :type ticker: str
         :param start_date: Start date for the trades. Format: yyyy-MM-dd
         :type start_date: str
@@ -57,10 +57,18 @@ class RestClient:
         :return: List of trades returned by the API.
         :rtype: dict of JSON response.
         """
+
+        external = ""
+        if market != Market.ROFEX:
+            ticker = ticker.replace(" ", "%20")
+            external = "&external=1"
+
         return self.api_request(urls.historic_trades.format(m=market.value,
                                                             s=ticker,
                                                             df=start_date,
-                                                            dt=end_date))
+                                                            dt=end_date,
+                                                            ext=external))
+
 
     def get_segments(self):
         """Make a request to the API and get a list of valid segments.

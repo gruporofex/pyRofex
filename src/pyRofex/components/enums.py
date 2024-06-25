@@ -55,8 +55,10 @@ class TimeInForce(Enum):
 class Market(Enum):
     """Market ID associated to the instruments.
     ROFEX: ROFEX Exchange.
+    BYMA: BYMA Exchange.
     """
     ROFEX = 'ROFX'
+    BYMA = 'MERV'
 
 
 class MarketSegment(Enum):
