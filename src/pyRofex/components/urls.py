@@ -15,8 +15,7 @@ instruments = {"all": "rest/instruments/all",
                "by_cfi": "rest/instruments/byCFICode?CFICode={cfi_code}",
                "by_segments": "rest/instruments/bySegment?MarketSegmentID={market_segment}&MarketID={market}"}
 market_data = "rest/marketdata/get?marketId={m}&symbol={s}&entries={e}&depth={d}"
-historic_trades = "rest/data/getTrades?marketId={m}&symbol={s}&dateFrom={df}&dateTo={dt}"
-historic_trades_byma = "rest/data/getTrades?marketId={m}&symbol=MERV%20-%20XMEV%20-%20{s}%20-%20{c}&dateFrom={df}&dateTo={dt}&external=1"
+historic_trades = "rest/data/getTrades?marketId={m}&symbol={s}&dateFrom={df}&dateTo={dt}{ext}"
 order_status = "rest/order/id?clOrdId={c}&proprietary={p}"
 new_order = "rest/order/newSingleOrder?marketId={market}&symbol={ticker}" \
             "&orderQty={size}&ordType={type}&side={side}&timeInForce={time_force}" \

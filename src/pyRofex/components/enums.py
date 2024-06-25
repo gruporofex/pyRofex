@@ -58,7 +58,7 @@ class Market(Enum):
     BYMA: BYMA Exchange.
     """
     ROFEX = 'ROFX'
-    BYMA = "MERV"
+    BYMA = 'MERV'
 
 
 class MarketSegment(Enum):
